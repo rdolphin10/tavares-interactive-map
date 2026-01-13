@@ -238,3 +238,4 @@ This project prioritizes:
 3. Refer to [CLAUDE.md](docs/CLAUDE.md) when modifying code
 
 **Ready to create your first interactive map? Start with SETUP.md!**
+
