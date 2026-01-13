@@ -36,3 +36,4 @@ build/
 # Local Netlify folder
 .netlify
 nul
+tmpclaude-*
