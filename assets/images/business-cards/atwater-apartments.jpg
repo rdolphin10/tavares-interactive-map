@@ -1,0 +1,6 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#f0f0f0"/>
+  <rect x="10" y="10" width="780" height="380" fill="white" stroke="#cccccc" stroke-width="2"/>
+  <text x="400" y="180" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#333333">Atwater Apartments</text>
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#666666">PLACEHOLDER - Replace with actual business card image</text>
+</svg>

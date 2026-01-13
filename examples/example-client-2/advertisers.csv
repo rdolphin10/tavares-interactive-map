@@ -1,0 +1,7 @@
+name,address,city,state,zip,phone,website,email,category,description,latitude,longitude
+"Pacific Coast Bank","3750 University Ave","Riverside","CA","92501","(951) 555-1000","https://pacificcoastbank.com","info@pacificcoastbank.com","Financial","Your trusted community banking partner since 1985",33.9745,-117.3732
+"Riverside Auto Center","1850 Market Street","Riverside","CA","92501","(951) 555-2000","https://riversideauto.com","service@riversideauto.com","Automotive","New and used vehicles with complete service department",33.9820,-117.3850
+"Mission Inn Restaurant","3649 Mission Inn Ave","Riverside","CA","92501","(951) 555-3000","https://missioninnrest.com","reservations@missioninnrest.com","Restaurant","Fine dining in historic downtown Riverside",33.9819,-117.3725
+"Citrus Valley Real Estate","4250 Brockton Ave","Riverside","CA","92501","(951) 555-4000","https://citrusvalleyre.com","homes@citrusvalleyre.com","Real Estate","Helping families find their dream homes for 30 years",33.9540,-117.4015
+"Riverside Family Dental","2050 Chicago Ave","Riverside","CA","92507","(951) 555-5000","https://riversidefamilydental.com","smile@riversidefamilydental.com","Healthcare","Comprehensive dental care for the whole family",33.9615,-117.3420
+"Canyon Crest Fitness","5225 Canyon Crest Dr","Riverside","CA","92507","(951) 555-6000","https://canyoncrestfitness.com","join@canyoncrestfitness.com","Fitness","State-of-the-art gym with personal training and classes",33.9730,-117.3235

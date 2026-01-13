@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chamber Map</title>
+
+    <!-- Mapbox GL JS CSS - Required for map styling -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+
+    <!-- Normalize CSS - Ensures consistent styling across browsers -->
+    <link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" rel="stylesheet">
+
+    <!-- Local CSS Files -->
+    <!-- styles.css contains core layout and structure (never changes per client) -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- theme.css contains colors and fonts (customize per client) -->
+    <link href="css/theme.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Full-Screen Map Container (Background) -->
+    <div id="map" class="map-container"></div>
+
+    <!-- Floating Chamber Logo (Top Left) -->
+    <div class="chamber-logo-floating">
+        <img id="client-logo" src="" alt="Chamber Logo" class="chamber-logo-img">
+    </div>
+
+    <!-- Floating Dolph Map Logo (Bottom Right) -->
+    <div class="dolph-logo-floating">
+        <img id="dolph-logo" src="assets/images/logo.png" alt="Dolph Map Company" class="dolph-logo-img">
+    </div>
+
+    <!-- Floating Banner 1 (Center Top - Premium Position) -->
+    <div class="banner-floating banner-1">
+        <a id="banner1-link" href="#" target="_blank">
+            <img id="banner1-img" src="" alt="Premium Sponsor" class="banner-img">
+        </a>
+    </div>
+
+    <!-- Floating Banner 2 (Slideshow Below Banner 1) -->
+    <div class="banner-floating banner-2">
+        <div id="banner2-slideshow" class="slideshow-container">
+            <!-- Slideshow images will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Floating Business Dropdown Toggle Button -->
+    <button id="business-dropdown-toggle" class="business-dropdown-toggle">
+        <span class="toggle-icon">☰</span> Advertisers
+    </button>
+
+    <!-- Floating Business Dropdown Panel -->
+    <div id="business-panel" class="business-panel">
+        <!-- Scrollable Business List -->
+        <div class="business-list-container">
+            <ul id="business-list" class="business-list">
+                <!-- Business list items will be populated by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- External Libraries (loaded from CDN) -->
+    <!-- Mapbox GL JS - Interactive map library -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+    <!-- PapaParse - CSV parsing library (simple and beginner-friendly) -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Local JavaScript Files - Load in specific order -->
+    <!-- 1. config.js - Must load first as other files depend on CONFIG object -->
+    <script src="js/config.js"></script>
+    <!-- 2. utils.js - Helper functions used by other modules -->
+    <script src="js/utils.js"></script>
+    <!-- 3. layer-inspector.js - Debug tool for inspecting map layers -->
+    <script src="js/layer-inspector.js"></script>
+    <!-- 4. dolph-style.js - Dolph Map Company custom styling -->
+    <script src="js/dolph-style.js"></script>
+    <!-- 5. map.js - Initialize the map (depends on config.js) -->
+    <script src="js/map.js"></script>
+    <!-- 6. markers.js - Create and manage markers (depends on map.js and utils.js) -->
+    <script src="js/markers.js"></script>
+    <!-- 7. dropdown.js - Business list navigation (replaces search.js) -->
+    <script src="js/dropdown.js"></script>
+
+</body>
+</html>

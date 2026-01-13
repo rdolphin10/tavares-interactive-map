@@ -1,0 +1,47 @@
+/**
+ * EXAMPLE CLIENT 2: Riverside Chamber - Blue Theme
+ * This demonstrates a blue color scheme matching a professional/corporate brand
+ */
+
+:root {
+    /* PRIMARY COLORS - Blue Theme */
+    --color-primary: #1565c0;       /* Professional blue - main brand */
+    --color-primary-dark: #0d47a1;  /* Darker blue for hovers */
+    --color-primary-light: #1976d2; /* Lighter blue */
+
+    /* SECONDARY COLORS */
+    --color-secondary: #ff9800;     /* Warm orange accent */
+    --color-secondary-dark: #f57c00;
+
+    /* TEXT COLORS */
+    --color-text-primary: #333333;
+    --color-text-secondary: #666666;
+    --color-text-light: #999999;
+    --color-text-white: #ffffff;
+
+    /* BACKGROUND COLORS */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f5f5f5;
+    --color-bg-accent: #e3f2fd;     /* Light blue tint */
+
+    /* BORDER AND DIVIDER COLORS */
+    --color-border: #dddddd;
+    --color-border-dark: #cccccc;
+
+    /* TYPOGRAPHY */
+    --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+    --font-size-large: 18px;
+
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* SHADOWS */
+    --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

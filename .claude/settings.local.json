@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp add:*)",
+      "WebFetch(domain:docs.mapbox.com)",
+      "mcp__mapbox-devkit__search_and_geocode_tool",
+      "Bash(start index.html)",
+      "Bash(npm install:*)",
+      "Bash(netlify login:*)",
+      "Bash(netlify status:*)",
+      "Bash(netlify sites:create:*)",
+      "Bash(netlify deploy:*)",
+      "mcp__mapbox-devkit__version_tool"
+    ]
+  }
+}

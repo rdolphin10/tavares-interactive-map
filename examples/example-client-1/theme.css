@@ -1,0 +1,47 @@
+/**
+ * EXAMPLE CLIENT 1: Springfield Chamber - Green Theme
+ * This demonstrates a green color scheme matching a nature/community focused brand
+ */
+
+:root {
+    /* PRIMARY COLORS - Green Theme */
+    --color-primary: #2d8659;       /* Forest green - main brand */
+    --color-primary-dark: #1e5c3c;  /* Darker green for hovers */
+    --color-primary-light: #4aa573; /* Lighter green */
+
+    /* SECONDARY COLORS */
+    --color-secondary: #ffa500;     /* Orange accent */
+    --color-secondary-dark: #cc8400;
+
+    /* TEXT COLORS */
+    --color-text-primary: #333333;
+    --color-text-secondary: #666666;
+    --color-text-light: #999999;
+    --color-text-white: #ffffff;
+
+    /* BACKGROUND COLORS */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f5f5f5;
+    --color-bg-accent: #e8f5ed;     /* Light green tint */
+
+    /* BORDER AND DIVIDER COLORS */
+    --color-border: #dddddd;
+    --color-border-dark: #cccccc;
+
+    /* TYPOGRAPHY */
+    --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --font-size-base: 16px;
+    --font-size-small: 14px;
+    --font-size-large: 18px;
+
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* SHADOWS */
+    --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

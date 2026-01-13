@@ -1,0 +1,6 @@
+name,address,city,state,zip,phone,website,email,category,description,latitude,longitude
+"Springfield Community Bank","100 E Capitol Ave","Springfield","IL","62701","(217) 555-1000","https://springfieldbank.com","info@springfieldbank.com","Financial","Full-service community bank serving Springfield since 1952",39.7983,-89.6520
+"Green Valley Restaurant","250 S 5th Street","Springfield","IL","62701","(217) 555-2100","https://greenvalleyrest.com","contact@greenvalleyrest.com","Restaurant","Farm-to-table dining with locally sourced ingredients",39.7975,-89.6495
+"Prairie Hardware","320 N Grand Ave W","Springfield","IL","62702","(217) 555-3200","https://prairiehardware.com","sales@prairiehardware.com","Retail","Complete hardware store for home and garden projects",39.8005,-89.6430
+"Lincoln Dental Group","145 W Monroe Street","Springfield","IL","62704","(217) 555-4300","https://lincolndental.com","appointments@lincolndental.com","Healthcare","Family dentistry with modern technology and care",39.7765,-89.6540
+"Maple Street Bakery","412 E Adams Street","Springfield","IL","62701","(217) 555-5400","https://maplestreetbakery.com","orders@maplestreetbakery.com","Restaurant","Artisan breads and pastries baked fresh daily",39.7980,-89.6470

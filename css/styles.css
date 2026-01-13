@@ -1,0 +1,552 @@
+/**
+ * STYLES.CSS - Core Layout and Structure
+ *
+ * This file contains layout, sizing, and positioning.
+ * DO NOT put colors, fonts, or client-specific styling here.
+ * Those belong in theme.css for easy customization.
+ *
+ * This file should rarely change between clients.
+ */
+
+/* ========================================
+   RESET AND BASE STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling, map fills viewport */
+}
+
+/* ========================================
+   MAP CONTAINER (FULL SCREEN)
+   ======================================== */
+
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Map stays in background */
+}
+
+/* ========================================
+   FLOATING BANNERS
+   ======================================== */
+
+/* Floating Banner 1 - Premium Position (Center Top) */
+.banner-floating.banner-1 {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    max-width: 780px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Banner images - ensure they fit properly */
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 220px;
+}
+
+.banner-floating.banner-1 a {
+    display: block;
+    line-height: 0;
+}
+
+/* Floating Banner 2 (Slideshow) */
+.banner-floating.banner-2 {
+    position: fixed;
+    top: 260px;  /* Below banner 1 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    max-width: 780px;
+    width: 90%;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+}
+
+.slideshow-item {
+    display: none;
+    width: 100%;
+}
+
+.slideshow-item.active {
+    display: block;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.slideshow-item a {
+    display: block;
+}
+
+.slideshow-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    object-fit: contain;
+    max-height: 220px;
+}
+
+.slideshow-item img:hover {
+    opacity: 0.9;
+}
+
+/* ========================================
+   FLOATING DOLPH MAP LOGO (Bottom Right)
+   ======================================== */
+
+.dolph-logo-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dolph-logo-floating:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.dolph-logo-img {
+    display: block;
+    height: 100px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+}
+
+/* ========================================
+   FLOATING CHAMBER LOGO (Top Left)
+   ======================================== */
+
+.chamber-logo-floating {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chamber-logo-floating:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.chamber-logo-img {
+    display: block;
+    height: 120px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+}
+
+/* ========================================
+   BUSINESS DROPDOWN TOGGLE BUTTON
+   ======================================== */
+
+.business-dropdown-toggle {
+    position: fixed;
+    top: 180px;
+    left: 20px;
+    z-index: 1001;
+    background: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.business-dropdown-toggle:hover {
+    background: #f5f5f5;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   FLOATING BUSINESS DROPDOWN PANEL
+   ======================================== */
+
+.business-panel {
+    position: fixed;
+    left: 20px;
+    top: 240px;
+    width: 320px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.business-panel.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Business List Container (Scrollable) */
+.business-list-container {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+}
+
+.business-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.business-list-item {
+    padding: 16px 20px;
+    min-height: 48px; /* Minimum touch target size */
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none; /* Prevent text selection on click */
+    -webkit-tap-highlight-color: transparent; /* Clean tap feedback */
+    touch-action: manipulation; /* Prevent double-tap zoom */
+}
+
+.business-list-item:hover {
+    background: #f5f5f5;
+}
+
+.business-list-item.active {
+    background: #e3f2fd;
+    border-left: 4px solid #0066cc;
+}
+
+/* ========================================
+   MAPBOX POPUP CUSTOMIZATION
+   ======================================== */
+
+/* Style the Mapbox popup content */
+.mapboxgl-popup-content {
+    padding: 0;
+    border-radius: 8px;
+    max-width: 360px;
+    overflow: hidden;
+}
+
+/* Business card image in popup */
+.popup-business-card {
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.business-card-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Will be dynamically adjusted based on available space */
+    display: block;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Popup content area - add padding to text elements */
+.popup-title,
+.popup-category,
+.popup-address,
+.popup-phone,
+.popup-description,
+.popup-buttons {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/* First element (title) gets top padding */
+.mapboxgl-popup-content > .popup-title:first-child {
+    margin-top: 12px;
+}
+
+/* Buttons get bottom margin before image */
+.popup-buttons {
+    margin-bottom: 12px;
+}
+
+/* If image is last child, no extra bottom margin needed */
+.mapboxgl-popup-content > .popup-business-card:last-child {
+    margin-bottom: 0;
+}
+
+/* If no image, last element gets bottom padding */
+.mapboxgl-popup-content > *:last-child:not(.popup-business-card) {
+    margin-bottom: 15px;
+}
+
+/* Close button styling */
+.mapboxgl-popup-close-button {
+    font-size: 20px;
+    padding: 8px;
+    right: 5px;
+    top: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Popup anchor (the arrow/tip) */
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: #fff;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - TABLET
+   ======================================== */
+
+@media (max-width: 768px) {
+    .business-panel {
+        width: 280px;
+        top: 520px;
+    }
+
+    .chamber-logo-floating {
+        top: 15px;
+        left: 15px;
+        padding: 12px;
+    }
+
+    .chamber-logo-img {
+        height: 100px;
+    }
+
+    .business-dropdown-toggle {
+        top: 470px;
+        left: 15px;
+    }
+
+    .banner-floating {
+        max-width: 90%;
+    }
+
+    .dolph-logo-floating {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .dolph-logo-img {
+        height: 80px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE
+   ======================================== */
+
+@media (max-width: 480px) {
+    /* Primary banner - smaller on mobile */
+    .banner-floating.banner-1 {
+        top: 10px;
+        width: 95%;
+        max-width: none;
+    }
+
+    .banner-floating.banner-1 .banner-img {
+        max-height: 120px;
+    }
+
+    /* Hide secondary banner on mobile to preserve map space */
+    .banner-floating.banner-2 {
+        display: none;
+    }
+
+    /* Chamber logo - move to bottom left, above Dolph logo */
+    .chamber-logo-floating {
+        top: auto;
+        bottom: 80px;
+        left: 10px;
+        padding: 8px;
+    }
+
+    .chamber-logo-img {
+        height: 50px;
+    }
+
+    /* Business dropdown toggle - bottom left corner */
+    .business-dropdown-toggle {
+        top: auto;
+        bottom: 140px;
+        left: 10px;
+        font-size: 0.9rem;
+        padding: 12px 16px;
+        min-height: 48px;
+    }
+
+    /* Business panel - anchored to bottom, limited height */
+    .business-panel {
+        top: auto;
+        bottom: 190px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: none;
+    }
+
+    .business-panel .business-list-container {
+        max-height: 40vh;
+    }
+
+    /* Dolph logo - smaller on mobile */
+    .dolph-logo-floating {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px;
+    }
+
+    .dolph-logo-img {
+        height: 50px;
+    }
+
+    /* Mobile popup adjustments */
+    .mapboxgl-popup-content {
+        max-width: 90vw;
+    }
+
+    .business-card-img {
+        max-height: 250px;
+    }
+
+    /* Larger close button for touch */
+    .mapboxgl-popup-close-button {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE LANDSCAPE
+   ======================================== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Hide banners in landscape to maximize map visibility */
+    .banner-floating.banner-1,
+    .banner-floating.banner-2 {
+        display: none;
+    }
+
+    /* Chamber logo - top left, smaller */
+    .chamber-logo-floating {
+        top: 10px;
+        bottom: auto;
+        left: 10px;
+        padding: 6px;
+    }
+
+    .chamber-logo-img {
+        height: 40px;
+    }
+
+    /* Business toggle - below chamber logo */
+    .business-dropdown-toggle {
+        top: 70px;
+        bottom: auto;
+        left: 10px;
+    }
+
+    /* Business panel - positioned below toggle */
+    .business-panel {
+        top: 120px;
+        bottom: auto;
+        left: 10px;
+        right: auto;
+        width: 280px;
+    }
+
+    .business-panel .business-list-container {
+        max-height: 50vh;
+    }
+
+    /* Smaller Dolph logo in landscape */
+    .dolph-logo-floating {
+        bottom: 10px;
+        right: 10px;
+        padding: 4px;
+    }
+
+    .dolph-logo-img {
+        height: 35px;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Hide element (used by JavaScript) */
+.hidden {
+    display: none !important;
+}
+
+/* Loading state (can be used for loading spinners) */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
