@@ -55,9 +55,9 @@ body {
 
 .chamber-logo-img {
     display: block;
-    height: 60px;
+    height: 75px;
     width: auto;
-    max-width: 180px;
+    max-width: 220px;
     object-fit: contain;
 }
 
@@ -80,7 +80,7 @@ body {
     display: block;
     width: auto;
     height: auto;
-    max-height: 70px;
+    max-height: 85px;
     object-fit: contain;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -97,7 +97,7 @@ body {
 
 /* Banner 2 (Slideshow) - Below Banner 1 */
 .banner2-container {
-    top: 90px; /* Below banner1 */
+    top: 105px; /* Below banner1 */
     left: 50%;
     transform: translateX(-50%);
     max-width: 728px;
@@ -139,7 +139,7 @@ body {
 /* Advertisers Toggle Button - Below Chamber Logo */
 .advertisers-toggle {
     position: fixed;
-    top: 90px; /* Below chamber logo */
+    top: 105px; /* Below chamber logo */
     left: 10px;
     z-index: 100;
     display: flex;
@@ -174,7 +174,7 @@ body {
 /* Business Panel - Dropdown below Advertisers button */
 .business-panel {
     position: fixed;
-    top: 140px; /* Below advertisers button */
+    top: 155px; /* Below advertisers button */
     left: 10px;
     z-index: 99;
     width: 280px;
