@@ -200,6 +200,12 @@ function applyDolphStyle(map) {
                     map.setPaintProperty(layer.id, 'text-color', DOLPH_COLORS.cityTitles);
                     map.setLayoutProperty(layer.id, 'text-transform', 'uppercase');
                     map.setLayoutProperty(layer.id, 'text-font', ['DIN Pro Bold', 'Arial Unicode MS Bold']);
+                    // Make Tavares larger than other cities
+                    map.setLayoutProperty(layer.id, 'text-size', [
+                        'case',
+                        ['==', ['get', 'name'], 'Tavares'], 18,
+                        12
+                    ]);
                 } catch (e) {
                     // Skip if can't style
                 }
