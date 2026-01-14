@@ -401,48 +401,52 @@ body {
    ======================================== */
 
 @media (max-width: 480px) {
-    /* Primary banner - smaller on mobile */
-    .banner-floating.banner-1 {
+    /* Chamber logo - keep at top left, smaller */
+    .chamber-logo-floating {
         top: 10px;
+        left: 10px;
+        padding: 6px;
+    }
+
+    .chamber-logo-img {
+        height: 45px;
+    }
+
+    /* Primary banner - below chamber logo, smaller */
+    .banner-floating.banner-1 {
+        top: 75px;
         width: 95%;
         max-width: none;
     }
 
     .banner-floating.banner-1 .banner-img {
-        max-height: 120px;
+        max-height: 100px;
     }
 
-    /* Hide secondary banner on mobile to preserve map space */
+    /* Show secondary banner on mobile - below banner 1 */
     .banner-floating.banner-2 {
-        display: none;
+        display: block;
+        top: 190px;
+        width: 95%;
+        max-width: none;
     }
 
-    /* Chamber logo - move to bottom left, above Dolph logo */
-    .chamber-logo-floating {
-        top: auto;
-        bottom: 80px;
-        left: 10px;
-        padding: 8px;
+    .banner-floating.banner-2 .slideshow-item img {
+        max-height: 100px;
     }
 
-    .chamber-logo-img {
-        height: 50px;
-    }
-
-    /* Business dropdown toggle - bottom left corner */
+    /* Business dropdown toggle - top left, below banners */
     .business-dropdown-toggle {
-        top: auto;
-        bottom: 140px;
+        top: 305px;
         left: 10px;
         font-size: 0.9rem;
-        padding: 12px 16px;
-        min-height: 48px;
+        padding: 10px 14px;
+        min-height: 44px;
     }
 
-    /* Business panel - anchored to bottom, limited height */
+    /* Business panel - anchored below toggle */
     .business-panel {
-        top: auto;
-        bottom: 190px;
+        top: 360px;
         left: 10px;
         right: 10px;
         width: auto;
@@ -450,7 +454,7 @@ body {
     }
 
     .business-panel .business-list-container {
-        max-height: 40vh;
+        max-height: 35vh;
     }
 
     /* Dolph logo - smaller on mobile */
@@ -461,7 +465,7 @@ body {
     }
 
     .dolph-logo-img {
-        height: 50px;
+        height: 45px;
     }
 
     /* Mobile popup adjustments */
