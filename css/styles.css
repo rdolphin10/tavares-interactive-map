@@ -423,21 +423,24 @@ body {
         max-height: 100px;
     }
 
-    /* Show secondary banner on mobile - below banner 1 */
+    /* Show secondary banner on mobile - right side, same level as dropdown */
     .banner-floating.banner-2 {
         display: block;
-        top: 190px;
-        width: 95%;
+        top: 185px;
+        left: auto;
+        right: 10px;
+        width: 55%;
         max-width: none;
+        transform: none;
     }
 
     .banner-floating.banner-2 .slideshow-item img {
-        max-height: 100px;
+        max-height: 80px;
     }
 
-    /* Business dropdown toggle - top left, below banners */
+    /* Business dropdown toggle - top left, after banner 1 */
     .business-dropdown-toggle {
-        top: 305px;
+        top: 185px;
         left: 10px;
         font-size: 0.9rem;
         padding: 10px 14px;
@@ -446,7 +449,7 @@ body {
 
     /* Business panel - anchored below toggle */
     .business-panel {
-        top: 360px;
+        top: 240px;
         left: 10px;
         right: 10px;
         width: auto;
