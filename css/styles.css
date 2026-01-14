@@ -280,7 +280,7 @@ body {
 /* Apply bounce animation to the SVG inside markers (not the marker container) */
 /* Also scale down the marker size */
 .mapboxgl-marker svg {
-    animation: marker-bounce 1.5s ease-in-out infinite;
+    animation: marker-bounce 1s ease-in-out infinite;
     transform-origin: bottom center;
     scale: 0.75;
 }
