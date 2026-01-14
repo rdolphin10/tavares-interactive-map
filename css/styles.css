@@ -47,10 +47,14 @@ body {
     top: 10px;
     left: 10px;
     z-index: 100;
+    width: 200px;
     background: white;
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .chamber-logo-img {
@@ -142,8 +146,10 @@ body {
     top: 105px; /* Below chamber logo */
     left: 10px;
     z-index: 100;
+    width: 200px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 10px 16px;
     background: #b71c1c;
