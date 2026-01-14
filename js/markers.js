@@ -115,6 +115,14 @@ function createMarker(advertiser, map) {
     marker.getElement().addEventListener('click', function() {
         closeAllPopups();
         currentOpenPopup = popup;
+
+        // Move popup to body to escape map's stacking context
+        setTimeout(function() {
+            var popupEl = popup.getElement();
+            if (popupEl && popupEl.parentElement) {
+                document.body.appendChild(popupEl);
+            }
+        }, 10);
     });
 
     // Track when popup is closed
@@ -344,6 +352,14 @@ function focusOnMarker(index) {
         setTimeout(function() {
             markerData.marker.togglePopup();
             currentOpenPopup = markerData.marker.getPopup();
+
+            // Move popup to body to escape map's stacking context
+            setTimeout(function() {
+                var popupEl = currentOpenPopup.getElement();
+                if (popupEl && popupEl.parentElement) {
+                    document.body.appendChild(popupEl);
+                }
+            }, 10);
         }, 1100);
     }
 }
@@ -351,6 +367,7 @@ function focusOnMarker(index) {
 /**
  * Calculate padding to reserve space for banners and popup
  * Returns a Mapbox-compatible padding object for flyTo()
+ * Uses responsive values based on screen size
  *
  * @returns {Object} Padding object with top, bottom, left, right values
  */
@@ -370,20 +387,39 @@ function getBannerPadding() {
         }
     }
 
-    // Add space for popup (varies, but ~600px typical) + buffer
-    const popupSpace = 600;
-    const buffer = 120;
+    // Responsive popup space and buffer based on screen size
+    let popupSpace, buffer;
+    const viewportWidth = window.innerWidth;
+
+    if (viewportWidth <= 400) {
+        // Small phones - smaller popups
+        popupSpace = 300;
+        buffer = 60;
+    } else if (viewportWidth <= 480) {
+        // Standard phones
+        popupSpace = 350;
+        buffer = 80;
+    } else if (viewportWidth <= 768) {
+        // Tablets
+        popupSpace = 450;
+        buffer = 100;
+    } else {
+        // Desktop
+        popupSpace = 600;
+        buffer = 120;
+    }
 
     // Calculate desired top padding
     let topPadding = bannerBottom + popupSpace + buffer;
 
-    // Cap at 70% of viewport height to ensure usable map area on small screens
-    const maxPadding = window.innerHeight * 0.7;
+    // Cap at percentage of viewport height based on device
+    const maxPaddingPercent = viewportWidth <= 480 ? 0.6 : 0.7;
+    const maxPadding = window.innerHeight * maxPaddingPercent;
     topPadding = Math.min(topPadding, maxPadding);
 
     return {
         top: topPadding,
-        bottom: 50,  // Small bottom padding
+        bottom: viewportWidth <= 480 ? 30 : 50,
         left: 0,
         right: 0
     };

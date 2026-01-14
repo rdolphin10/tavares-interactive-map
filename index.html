@@ -21,43 +21,49 @@
     <!-- Full-Screen Map Container (Background) -->
     <div id="map" class="map-container"></div>
 
-    <!-- Floating Chamber Logo (Top Left) -->
-    <div class="chamber-logo-floating">
-        <img id="client-logo" src="" alt="Chamber Logo" class="chamber-logo-img">
+    <!-- ========================================
+         FLOATING UI ELEMENTS OVERLAY
+         ======================================== -->
+
+    <!-- Chamber Logo (Top Left on desktop, beside slideshow on mobile) -->
+    <div class="chamber-logo-container" id="chamber-logo-container">
+        <a href="https://tavareschamber.com" target="_blank" class="chamber-logo-link">
+            <img id="client-logo" src="" alt="Chamber Logo" class="chamber-logo-img">
+        </a>
+    </div>
+
+    <!-- Top Banner - Banner 1 (Top Center) -->
+    <div class="banner-container banner1-container" id="banner1-container">
+        <a id="banner1-link" href="#" target="_blank" class="banner-link">
+            <img id="banner1-img" src="" alt="Premium Sponsor" class="banner-img">
+        </a>
+    </div>
+
+    <!-- Slideshow Banner - Banner 2 (Below Banner 1) -->
+    <div class="banner-container banner2-container" id="banner2-container">
+        <div id="banner2-slideshow" class="banner-slideshow"></div>
+    </div>
+
+    <!-- Advertisers Dropdown Button (Below Chamber Logo) -->
+    <button class="advertisers-toggle" id="business-dropdown-toggle">
+        <span class="toggle-icon">&#9776;</span>
+        <span class="toggle-text">Interactive Directory</span>
+        <span class="toggle-arrow">&#9662;</span>
+    </button>
+
+    <!-- Business Panel (Dropdown below Advertisers button) -->
+    <div class="business-panel" id="business-panel">
+        <div class="panel-header">
+            <h3 class="panel-title">Business Directory</h3>
+        </div>
+        <ul class="business-list" id="business-list">
+            <!-- Business items populated by dropdown.js -->
+        </ul>
     </div>
 
     <!-- Floating Dolph Map Logo (Bottom Right) -->
     <div class="dolph-logo-floating">
         <img id="dolph-logo" src="assets/images/logo.png" alt="Dolph Map Company" class="dolph-logo-img">
-    </div>
-
-    <!-- Floating Banner 1 (Center Top - Premium Position) -->
-    <div class="banner-floating banner-1">
-        <a id="banner1-link" href="#" target="_blank">
-            <img id="banner1-img" src="" alt="Premium Sponsor" class="banner-img">
-        </a>
-    </div>
-
-    <!-- Floating Banner 2 (Slideshow Below Banner 1) -->
-    <div class="banner-floating banner-2">
-        <div id="banner2-slideshow" class="slideshow-container">
-            <!-- Slideshow images will be populated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Floating Business Dropdown Toggle Button -->
-    <button id="business-dropdown-toggle" class="business-dropdown-toggle">
-        <span class="toggle-icon">☰</span> Advertisers
-    </button>
-
-    <!-- Floating Business Dropdown Panel -->
-    <div id="business-panel" class="business-panel">
-        <!-- Scrollable Business List -->
-        <div class="business-list-container">
-            <ul id="business-list" class="business-list">
-                <!-- Business list items will be populated by JavaScript -->
-            </ul>
-        </div>
     </div>
 
     <!-- External Libraries (loaded from CDN) -->

@@ -100,39 +100,20 @@ function setupBanner1() {
             banner1Img.src = CONFIG.banners.banner1.image;
             banner1Img.alt = CONFIG.banners.banner1.alt || 'Premium Sponsor';
 
-            // Adjust banner 2 position once banner 1 image loads
-            banner1Img.addEventListener('load', function() {
-                adjustBanner2Position();
-            });
+            // Note: Banner positioning is now handled by layout.js
         }
     }
 }
 
 /**
- * Adjust Banner 2 Position
+ * Adjust Banner 2 Position (DEPRECATED)
  *
- * Positions banner 2 below banner 1 based on banner 1's actual height.
- * This prevents overlapping when banner 1 has a tall image.
+ * This function is kept for backwards compatibility but positioning
+ * is now handled entirely by layout.js for better responsive behavior.
  */
 function adjustBanner2Position() {
-    const banner1 = document.querySelector('.banner-floating.banner-1');
-    const banner2 = document.querySelector('.banner-floating.banner-2');
-
-    if (!banner1 || !banner2) {
-        return;
-    }
-
-    // Get banner 1's position and height
-    const banner1Rect = banner1.getBoundingClientRect();
-    const banner1Bottom = banner1Rect.top + banner1Rect.height;
-
-    // Position banner 2 with a 20px gap below banner 1
-    const gap = 20;
-    const newTop = banner1Bottom + gap;
-
-    banner2.style.top = newTop + 'px';
-
-    console.log('Banner 2 repositioned to ' + newTop + 'px (Banner 1 height: ' + banner1Rect.height + 'px)');
+    // Positioning is now handled by layout.js
+    // This function is kept to prevent errors from old code calling it
 }
 
 /**
@@ -370,11 +351,10 @@ function flyToLocation(longitude, latitude, zoom) {
  * Handle window resize
  *
  * Resize the map when the browser window is resized.
- * Also adjust banner 2 position in case banner 1 height changes.
+ * Layout positioning is handled by layout.js.
  */
 window.addEventListener('resize', function() {
     resizeMap();
-    adjustBanner2Position();
 });
 
 /**

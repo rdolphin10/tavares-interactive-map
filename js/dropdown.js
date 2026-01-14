@@ -79,22 +79,32 @@ function initializeDropdown(advertisers) {
     // Clear any existing items
     businessListElement.innerHTML = '';
 
+    // Create array with original indices for sorting
+    var sortedBusinesses = advertisers.map(function(advertiser, index) {
+        return { advertiser: advertiser, originalIndex: index };
+    });
+
+    // Sort alphabetically by name
+    sortedBusinesses.sort(function(a, b) {
+        return a.advertiser.name.localeCompare(b.advertiser.name);
+    });
+
     // Create list item for each business
-    advertisers.forEach(function(advertiser, index) {
+    sortedBusinesses.forEach(function(item) {
         const li = document.createElement('li');
         li.className = 'business-list-item';
-        li.textContent = advertiser.name;
-        li.dataset.index = index;  // Store index for later use
+        li.textContent = item.advertiser.name;
+        li.dataset.index = item.originalIndex;  // Store original index for marker lookup
 
         // Add click event listener
         li.addEventListener('click', function() {
-            selectBusiness(index);
+            selectBusiness(item.originalIndex);
         });
 
         businessListElement.appendChild(li);
     });
 
-    console.log('Business dropdown initialized with ' + advertisers.length + ' businesses');
+    console.log('Business dropdown initialized with ' + advertisers.length + ' businesses (sorted alphabetically)');
 }
 
 /**

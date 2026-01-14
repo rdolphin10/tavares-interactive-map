@@ -38,62 +38,97 @@ body {
 }
 
 /* ========================================
-   FLOATING BANNERS
+   FLOATING UI LAYOUT - DESKTOP/TABLET (>600px)
    ======================================== */
 
-/* Floating Banner 1 - Premium Position (Center Top) */
-.banner-floating.banner-1 {
+/* Chamber Logo - Top Left */
+.chamber-logo-container {
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    max-width: 780px;
-    width: 90%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    background: white;
+    padding: 8px;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.chamber-logo-img {
+    display: block;
+    height: 60px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+}
+
+/* Banner Container Base Styles */
+.banner-container {
+    position: fixed;
+    z-index: 100;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
 }
 
-/* Banner images - ensure they fit properly */
+.banner-link {
+    display: flex;
+    justify-content: center;
+}
+
 .banner-img {
-    width: 100%;
+    display: block;
+    width: auto;
     height: auto;
-    display: block;
+    max-height: 70px;
     object-fit: contain;
-    max-height: 220px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-.banner-floating.banner-1 a {
-    display: block;
-    line-height: 0;
-}
-
-/* Floating Banner 2 (Slideshow) */
-.banner-floating.banner-2 {
-    position: fixed;
-    top: 260px;  /* Below banner 1 */
+/* Banner 1 - Top Center */
+.banner1-container {
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999;
-    max-width: 780px;
-    width: 90%;
+    max-width: 728px;
+    width: calc(100% - 400px); /* Leave room for logo on left */
 }
 
-/* Slideshow container */
-.slideshow-container {
+/* Banner 2 (Slideshow) - Below Banner 1 */
+.banner2-container {
+    top: 90px; /* Below banner1 */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 728px;
+    width: calc(100% - 400px);
+}
+
+.banner-slideshow {
     position: relative;
     width: 100%;
 }
 
+/* Slideshow Items */
 .slideshow-item {
     display: none;
     width: 100%;
 }
 
 .slideshow-item.active {
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.slideshow-item img {
     display: block;
-    animation: fadeIn 1s ease-in-out;
+    width: auto;
+    height: auto;
+    max-height: 70px;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 @keyframes fadeIn {
@@ -101,24 +136,102 @@ body {
     to { opacity: 1; }
 }
 
-.slideshow-item a {
-    display: block;
-}
-
-.slideshow-item img {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Advertisers Toggle Button - Below Chamber Logo */
+.advertisers-toggle {
+    position: fixed;
+    top: 90px; /* Below chamber logo */
+    left: 10px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #b71c1c;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     cursor: pointer;
-    transition: opacity 0.3s ease;
-    object-fit: contain;
-    max-height: 220px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-.slideshow-item img:hover {
-    opacity: 0.9;
+.advertisers-toggle:hover {
+    background-color: #8b0000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.toggle-icon {
+    font-size: 16px;
+}
+
+.toggle-arrow {
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+/* Business Panel - Dropdown below Advertisers button */
+.business-panel {
+    position: fixed;
+    top: 140px; /* Below advertisers button */
+    left: 10px;
+    z-index: 99;
+    width: 280px;
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+.business-panel.open {
+    max-height: calc(100vh - 180px);
+    opacity: 1;
+    overflow-y: auto;
+}
+
+.panel-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+.panel-title {
+    margin: 0;
+    font-size: 16px;
+}
+
+.business-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.business-list-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+}
+
+.business-list-item:hover {
+    background-color: #f5f5f5;
+}
+
+.business-list-item.active {
+    background-color: #e6f2ff;
+    border-left: 3px solid #0066cc;
+    padding-left: 13px;
+}
+
+.business-list-item:last-child {
+    border-bottom: none;
 }
 
 /* ========================================
@@ -129,7 +242,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1000;
+    z-index: 200;
     background: white;
     padding: 10px;
     border-radius: 8px;
@@ -148,129 +261,6 @@ body {
     width: auto;
     max-width: 300px;
     object-fit: contain;
-}
-
-/* ========================================
-   FLOATING CHAMBER LOGO (Top Left)
-   ======================================== */
-
-.chamber-logo-floating {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.chamber-logo-floating:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}
-
-.chamber-logo-img {
-    display: block;
-    height: 120px;
-    width: auto;
-    max-width: 300px;
-    object-fit: contain;
-}
-
-/* ========================================
-   BUSINESS DROPDOWN TOGGLE BUTTON
-   ======================================== */
-
-.business-dropdown-toggle {
-    position: fixed;
-    top: 180px;
-    left: 20px;
-    z-index: 1001;
-    background: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.business-dropdown-toggle:hover {
-    background: #f5f5f5;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-    transform: translateY(-2px);
-}
-
-.toggle-icon {
-    font-size: 1.2rem;
-}
-
-/* ========================================
-   FLOATING BUSINESS DROPDOWN PANEL
-   ======================================== */
-
-.business-panel {
-    position: fixed;
-    left: 20px;
-    top: 240px;
-    width: 320px;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 1000;
-    border-radius: 8px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.business-panel.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Business List Container (Scrollable) */
-.business-list-container {
-    max-height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    overscroll-behavior: contain; /* Prevent scroll chaining */
-}
-
-.business-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.business-list-item {
-    padding: 16px 20px;
-    min-height: 48px; /* Minimum touch target size */
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    user-select: none; /* Prevent text selection on click */
-    -webkit-tap-highlight-color: transparent; /* Clean tap feedback */
-    touch-action: manipulation; /* Prevent double-tap zoom */
-}
-
-.business-list-item:hover {
-    background: #f5f5f5;
-}
-
-.business-list-item.active {
-    background: #e3f2fd;
-    border-left: 4px solid #0066cc;
 }
 
 /* ========================================
@@ -357,134 +347,167 @@ body {
     border-top-color: #fff;
 }
 
+/* Ensure popups appear above all UI elements */
+/* The popup needs to break out of the map's stacking context */
+.mapboxgl-map .mapboxgl-popup {
+    z-index: 9999 !important;
+}
+
+.mapboxgl-popup {
+    z-index: 9999 !important;
+}
+
+.mapboxgl-popup-content {
+    z-index: 9999 !important;
+}
+
+/* Give map controls layer a higher z-index to allow popups above fixed UI */
+.mapboxgl-control-container {
+    z-index: 50 !important;
+}
+
+/* Make map canvas lower so it doesn't create stacking issues */
+.mapboxgl-canvas {
+    z-index: 0 !important;
+}
+
 /* ========================================
-   RESPONSIVE DESIGN - TABLET
+   RESPONSIVE DESIGN - TABLET (601px - 900px)
    ======================================== */
 
-@media (max-width: 768px) {
-    .business-panel {
-        width: 280px;
-        top: 520px;
-    }
-
-    .chamber-logo-floating {
-        top: 15px;
-        left: 15px;
-        padding: 12px;
+@media (max-width: 900px) {
+    .banner1-container,
+    .banner2-container {
+        width: calc(100% - 240px);
     }
 
     .chamber-logo-img {
-        height: 100px;
+        height: 50px;
+        max-width: 150px;
     }
 
-    .business-dropdown-toggle {
-        top: 470px;
-        left: 15px;
+    .advertisers-toggle {
+        top: 80px;
     }
 
-    .banner-floating {
-        max-width: 90%;
-    }
-
-    .dolph-logo-floating {
-        bottom: 15px;
-        right: 15px;
-    }
-
-    .dolph-logo-img {
-        height: 80px;
+    .business-panel {
+        top: 130px;
     }
 }
 
 /* ========================================
-   RESPONSIVE DESIGN - MOBILE
+   RESPONSIVE DESIGN - SMALL SCREENS (Phones <=600px)
    ======================================== */
 
-@media (max-width: 480px) {
-    /* Chamber logo - keep at top left, smaller */
-    .chamber-logo-floating {
+@media (max-width: 600px) {
+    /* Mobile Layout: Stack elements vertically
+       Banner 1 at top, then slideshow + logo side by side */
+
+    /* Banner 1 - Full width at top */
+    .banner1-container {
         top: 10px;
-        left: 10px;
-        padding: 6px;
-    }
-
-    .chamber-logo-img {
-        height: 45px;
-    }
-
-    /* Primary banner - below chamber logo, smaller */
-    .banner-floating.banner-1 {
-        top: 75px;
-        width: 95%;
-        max-width: none;
-    }
-
-    .banner-floating.banner-1 .banner-img {
-        max-height: 100px;
-    }
-
-    /* Show secondary banner on mobile - right side, same level as dropdown */
-    .banner-floating.banner-2 {
-        display: block;
-        top: 185px;
-        left: auto;
-        right: 10px;
-        width: 55%;
-        max-width: none;
-        transform: none;
-    }
-
-    .banner-floating.banner-2 .slideshow-item img {
-        max-height: 80px;
-    }
-
-    /* Business dropdown toggle - top left, after banner 1 */
-    .business-dropdown-toggle {
-        top: 185px;
-        left: 10px;
-        font-size: 0.9rem;
-        padding: 10px 14px;
-        min-height: 44px;
-    }
-
-    /* Business panel - anchored below toggle */
-    .business-panel {
-        top: 240px;
         left: 10px;
         right: 10px;
         width: auto;
+        transform: none;
         max-width: none;
     }
 
-    .business-panel .business-list-container {
-        max-height: 35vh;
+    .banner-img {
+        max-height: 60px;
     }
 
-    /* Dolph logo - smaller on mobile */
-    .dolph-logo-floating {
-        bottom: 10px;
+    /* Row container for slideshow + logo (via flexbox positioning) */
+    /* Banner 2 (Slideshow) - Left side of row */
+    .banner2-container {
+        top: 80px; /* Below banner1 */
+        left: 10px;
+        right: auto;
+        width: calc(100% - 100px); /* Leave room for logo */
+        transform: none;
+        max-width: none;
+    }
+
+    .slideshow-item img {
+        max-height: 50px;
+    }
+
+    /* Chamber Logo - Right side, next to slideshow */
+    .chamber-logo-container {
+        top: 80px; /* Same row as slideshow */
+        left: auto;
         right: 10px;
-        padding: 6px;
+        padding: 5px;
+    }
+
+    .chamber-logo-img {
+        height: 40px;
+        max-width: 70px;
+    }
+
+    /* Advertisers Button - Below slideshow row */
+    .advertisers-toggle {
+        top: 145px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .toggle-text {
+        display: inline; /* Keep text visible on mobile */
+    }
+
+    /* Business Panel - Below button */
+    .business-panel {
+        top: 190px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+
+    .business-panel.open {
+        max-height: calc(100vh - 220px);
+    }
+
+    /* Smaller Dolph logo */
+    .dolph-logo-img {
+        height: 35px;
+    }
+
+    .dolph-logo-floating {
+        padding: 5px;
+    }
+}
+
+/* Very small phones (<=400px) */
+@media (max-width: 400px) {
+    .banner-img {
+        max-height: 50px;
+    }
+
+    .slideshow-item img {
+        max-height: 40px;
+    }
+
+    .chamber-logo-img {
+        height: 32px;
+        max-width: 60px;
+    }
+
+    .banner2-container {
+        width: calc(100% - 85px);
+    }
+
+    .advertisers-toggle {
+        top: 130px;
+    }
+
+    .business-panel {
+        top: 175px;
     }
 
     .dolph-logo-img {
-        height: 45px;
-    }
-
-    /* Mobile popup adjustments */
-    .mapboxgl-popup-content {
-        max-width: 90vw;
-    }
-
-    .business-card-img {
-        max-height: 250px;
-    }
-
-    /* Larger close button for touch */
-    .mapboxgl-popup-close-button {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
+        height: 30px;
     }
 }
 
@@ -492,54 +515,57 @@ body {
    RESPONSIVE DESIGN - MOBILE LANDSCAPE
    ======================================== */
 
-@media (max-width: 768px) and (orientation: landscape) {
-    /* Hide banners in landscape to maximize map visibility */
-    .banner-floating.banner-1,
-    .banner-floating.banner-2 {
-        display: none;
-    }
-
-    /* Chamber logo - top left, smaller */
-    .chamber-logo-floating {
-        top: 10px;
-        bottom: auto;
-        left: 10px;
-        padding: 6px;
+@media (max-width: 900px) and (orientation: landscape) {
+    /* Landscape: Keep desktop-like layout but smaller */
+    .chamber-logo-container {
+        top: 5px;
+        left: 5px;
+        padding: 4px;
     }
 
     .chamber-logo-img {
-        height: 40px;
+        height: 35px;
     }
 
-    /* Business toggle - below chamber logo */
-    .business-dropdown-toggle {
+    .banner1-container {
+        top: 5px;
+    }
+
+    .banner2-container {
         top: 70px;
-        bottom: auto;
-        left: 10px;
     }
 
-    /* Business panel - positioned below toggle */
+    .banner-img,
+    .slideshow-item img {
+        max-height: 55px;
+    }
+
+    .advertisers-toggle {
+        top: 55px;
+        left: 5px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
     .business-panel {
-        top: 120px;
-        bottom: auto;
-        left: 10px;
-        right: auto;
-        width: 280px;
+        top: 95px;
+        left: 5px;
+        max-width: 250px;
     }
 
-    .business-panel .business-list-container {
-        max-height: 50vh;
+    .business-panel.open {
+        max-height: calc(100vh - 110px);
     }
 
     /* Smaller Dolph logo in landscape */
     .dolph-logo-floating {
-        bottom: 10px;
-        right: 10px;
+        bottom: 5px;
+        right: 5px;
         padding: 4px;
     }
 
     .dolph-logo-img {
-        height: 35px;
+        height: 30px;
     }
 }
 
