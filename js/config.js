@@ -187,7 +187,7 @@ const CONFIG = {
          * Use hex color code (e.g., '#FF0000' for red)
          * Can be customized to match client branding
          */
-        defaultColor: '#001f3f',
+        defaultColor: '#1a5276',
 
         /**
          * Enable Marker Clustering
