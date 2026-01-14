@@ -372,29 +372,6 @@ body {
 }
 
 /* ========================================
-   MARKER STYLING AND ANIMATION
-   ======================================== */
-
-/* Make markers smaller */
-.mapboxgl-marker svg {
-    transform: scale(0.7);
-}
-
-/* Bounce animation for markers */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-.mapboxgl-marker {
-    animation: bounce 2s ease-in-out infinite;
-}
-
-/* ========================================
    RESPONSIVE DESIGN - TABLET (601px - 900px)
    ======================================== */
 
