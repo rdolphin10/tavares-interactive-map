@@ -263,9 +263,9 @@ body {
 
 .dolph-logo-img {
     display: block;
-    height: 100px;
+    height: 80px;
     width: auto;
-    max-width: 300px;
+    max-width: 325px;
     object-fit: contain;
 }
 
