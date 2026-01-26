@@ -140,18 +140,8 @@ function createMarker(advertiser, map) {
         closeAllPopups();
         currentOpenPopup = popup;
 
-        // Move popup to body to escape map's stacking context
-        setTimeout(function() {
-            var popupEl = popup.getElement();
-            if (popupEl && popupEl.parentElement) {
-                document.body.appendChild(popupEl);
-            }
-
-            // After popup renders, ensure it's fully visible in viewport
-            setTimeout(function() {
-                ensurePopupVisible(popup, map);
-            }, 50);
-        }, 10);
+        // Wait for popup to open and render
+        waitForPopupAndEnsureVisible(popup, map);
     });
 
     // Track when popup is closed
@@ -382,27 +372,56 @@ function focusOnMarker(index) {
             markerData.marker.togglePopup();
             currentOpenPopup = markerData.marker.getPopup();
 
-            // Move popup to body to escape map's stacking context
-            setTimeout(function() {
-                var popupEl = currentOpenPopup.getElement();
-                if (popupEl && popupEl.parentElement) {
-                    document.body.appendChild(popupEl);
-                }
-
-                // After popup renders, ensure it's fully visible in viewport
-                setTimeout(function() {
-                    ensurePopupVisible(currentOpenPopup, map);
-                }, 50);
-            }, 10);
+            // Wait for popup to render and ensure visible
+            waitForPopupAndEnsureVisible(currentOpenPopup, map);
         }, 1100);
     }
 }
 
 /**
+ * Wait for popup to render then ensure it's visible
+ *
+ * This function handles the timing of waiting for the popup DOM element
+ * to be created and rendered before checking visibility.
+ *
+ * @param {mapboxgl.Popup} popup - The popup instance
+ * @param {mapboxgl.Map} map - The map instance
+ */
+function waitForPopupAndEnsureVisible(popup, map) {
+    if (!popup) return;
+
+    var attempts = 0;
+    var maxAttempts = 20; // Max ~1 second of waiting
+
+    function tryProcess() {
+        attempts++;
+        var popupEl = popup.getElement();
+
+        // If popup element exists and has dimensions
+        if (popupEl && popupEl.getBoundingClientRect().height > 0) {
+            // Move popup to body to escape map's stacking context
+            if (popupEl.parentElement && popupEl.parentElement !== document.body) {
+                document.body.appendChild(popupEl);
+            }
+
+            // Ensure it's fully visible
+            ensurePopupVisible(popup, map);
+        } else if (attempts < maxAttempts) {
+            // Try again after a short delay
+            setTimeout(tryProcess, 50);
+        }
+    }
+
+    // Start checking after initial render
+    setTimeout(tryProcess, 10);
+}
+
+/**
  * Ensure popup is fully visible within the browser viewport
  *
- * If the popup extends beyond the top of the viewport,
- * pan the map down to bring the entire popup into view.
+ * Checks all edges (top, bottom, left, right) and pans the map
+ * to bring the entire popup into view. Also accounts for UI elements
+ * like banners at the top of the screen.
  *
  * @param {mapboxgl.Popup} popup - The popup instance
  * @param {mapboxgl.Map} map - The map instance
@@ -413,16 +432,116 @@ function ensurePopupVisible(popup, map) {
     var popupEl = popup.getElement();
     if (!popupEl) return;
 
-    var popupRect = popupEl.getBoundingClientRect();
+    // Get the actual popup content container for accurate dimensions
+    var popupContent = popupEl.querySelector('.mapboxgl-popup-content');
+    if (!popupContent) popupContent = popupEl;
 
-    // Check if popup top is above the viewport (cut off at top)
-    if (popupRect.top < 0) {
-        // Calculate how many pixels we need to pan down
-        var panAmount = Math.abs(popupRect.top) + 20; // 20px buffer
+    // Function to calculate and apply pan
+    function checkAndPan() {
+        var popupRect = popupEl.getBoundingClientRect();
 
-        // Pan the map down to bring popup into view
-        map.panBy([0, -panAmount], { duration: 300 });
+        // Skip if popup has no dimensions yet (not rendered)
+        if (popupRect.width === 0 || popupRect.height === 0) {
+            return false;
+        }
+
+        // Calculate safe zone (accounting for UI elements)
+        var safeTop = getTopSafeZone();
+        var safeBottom = 20;  // 20px buffer from bottom
+        var safeLeft = 10;    // 10px buffer from left
+        var safeRight = 10;   // 10px buffer from right
+
+        var viewportWidth = window.innerWidth;
+        var viewportHeight = window.innerHeight;
+
+        var panX = 0;
+        var panY = 0;
+
+        // Check top edge (most common issue)
+        if (popupRect.top < safeTop) {
+            panY = -(safeTop - popupRect.top + 20); // Pan down (negative Y)
+        }
+        // Check bottom edge
+        else if (popupRect.bottom > viewportHeight - safeBottom) {
+            panY = popupRect.bottom - (viewportHeight - safeBottom) + 20; // Pan up (positive Y)
+        }
+
+        // Check left edge
+        if (popupRect.left < safeLeft) {
+            panX = -(safeLeft - popupRect.left + 10); // Pan right (negative X)
+        }
+        // Check right edge
+        else if (popupRect.right > viewportWidth - safeRight) {
+            panX = popupRect.right - (viewportWidth - safeRight) + 10; // Pan left (positive X)
+        }
+
+        // Apply pan if needed
+        if (panX !== 0 || panY !== 0) {
+            map.panBy([panX, panY], { duration: 300 });
+            return true;
+        }
+        return false;
     }
+
+    // Initial check
+    checkAndPan();
+
+    // Re-check after a longer delay to catch late renders
+    setTimeout(function() {
+        checkAndPan();
+    }, 150);
+
+    // Watch for images loading in the popup (business cards)
+    var images = popupEl.querySelectorAll('img');
+    images.forEach(function(img) {
+        if (!img.complete) {
+            img.addEventListener('load', function() {
+                // Small delay to let layout settle after image loads
+                setTimeout(function() {
+                    checkAndPan();
+                }, 50);
+            });
+        }
+    });
+}
+
+/**
+ * Get the safe zone from the top of the viewport
+ * Accounts for banners and other UI elements
+ *
+ * @returns {number} - Pixels from top that should be kept clear
+ */
+function getTopSafeZone() {
+    var safeTop = 10; // Minimum buffer
+
+    // Check for banner containers
+    var banner1 = document.querySelector('.banner1-container');
+    var banner2 = document.querySelector('.banner2-container');
+
+    if (banner1 && banner1.offsetParent !== null) {
+        var rect = banner1.getBoundingClientRect();
+        if (rect.bottom > safeTop) {
+            safeTop = rect.bottom + 10;
+        }
+    }
+
+    if (banner2 && banner2.offsetParent !== null) {
+        var rect = banner2.getBoundingClientRect();
+        if (rect.bottom > safeTop) {
+            safeTop = rect.bottom + 10;
+        }
+    }
+
+    // Also check for chamber logo container on mobile
+    var chamberLogo = document.querySelector('.chamber-logo-container');
+    if (chamberLogo && chamberLogo.offsetParent !== null) {
+        var rect = chamberLogo.getBoundingClientRect();
+        if (rect.bottom > safeTop) {
+            safeTop = rect.bottom + 10;
+        }
+    }
+
+    return safeTop;
 }
 
 /**
