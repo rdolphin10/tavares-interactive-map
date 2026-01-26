@@ -103,13 +103,37 @@ function createMarker(advertiser, map) {
         maxWidth: '360px'     // Balanced width
     }).setHTML(popupHTML);
 
-    // Create the marker with navy blue color
-    const marker = new mapboxgl.Marker({
-        color: CONFIG.markers.defaultColor  // Navy blue color from config
-    })
-        .setLngLat([longitude, latitude]) // Position
-        .setPopup(popup)                  // Attach popup
-        .addTo(map);                      // Add to map
+    // Check if this is the Chamber of Commerce (use building icon)
+    const isChamber = advertiser.name && advertiser.name.toLowerCase().includes('chamber of commerce');
+
+    let marker;
+    if (isChamber) {
+        // Create custom building icon for Chamber (classic building with columns)
+        const chamberEl = document.createElement('div');
+        chamberEl.className = 'chamber-marker';
+        chamberEl.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#1a5276">
+                <path d="M12 2L2 8v2h20V8L12 2zM4 12v8h3v-6h2v6h2v-6h2v6h2v-6h2v6h3v-8H4zM2 22h20v-2H2v2z"/>
+            </svg>
+        `;
+        chamberEl.style.cursor = 'pointer';
+
+        marker = new mapboxgl.Marker({
+            element: chamberEl,
+            anchor: 'bottom'
+        })
+            .setLngLat([longitude, latitude])
+            .setPopup(popup)
+            .addTo(map);
+    } else {
+        // Create standard marker with navy blue color
+        marker = new mapboxgl.Marker({
+            color: CONFIG.markers.defaultColor  // Navy blue color from config
+        })
+            .setLngLat([longitude, latitude]) // Position
+            .setPopup(popup)                  // Attach popup
+            .addTo(map);                      // Add to map
+    }
 
     // Close any other open popup when this marker is clicked
     marker.getElement().addEventListener('click', function() {

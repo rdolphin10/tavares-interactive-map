@@ -270,7 +270,7 @@ function applyDolphStyle(map) {
 function addCustomTavaresLabel(map) {
     // Tavares coordinates with offset (moved south to avoid pins)
     const tavaresLng = -81.7268;
-    const tavaresLat = 28.7935;  // Offset south from actual center (~28.8022)
+    const tavaresLat = 28.797;  // Adjusted position
 
     // Create custom label element
     const labelEl = document.createElement('div');
