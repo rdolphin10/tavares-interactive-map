@@ -272,6 +272,9 @@ function addCustomTavaresLabel(map) {
     const tavaresLng = -81.7268;
     const tavaresLat = 28.797;  // Adjusted position
 
+    // Zoom level at which to hide the label (similar to native city labels)
+    const hideAtZoom = 14;
+
     // Create custom label element
     const labelEl = document.createElement('div');
     labelEl.className = 'custom-city-label';
@@ -288,14 +291,30 @@ function addCustomTavaresLabel(map) {
     `;
 
     // Add as marker
-    new mapboxgl.Marker({
+    const tavaresMarker = new mapboxgl.Marker({
         element: labelEl,
         anchor: 'center'
     })
     .setLngLat([tavaresLng, tavaresLat])
     .addTo(map);
 
-    console.log('Custom Tavares label added');
+    // Function to update visibility based on zoom
+    function updateLabelVisibility() {
+        const zoom = map.getZoom();
+        if (zoom >= hideAtZoom) {
+            labelEl.style.display = 'none';
+        } else {
+            labelEl.style.display = 'block';
+        }
+    }
+
+    // Listen for zoom changes
+    map.on('zoom', updateLabelVisibility);
+
+    // Set initial visibility
+    updateLabelVisibility();
+
+    console.log('Custom Tavares label added with zoom-based visibility');
 }
 
 /**
