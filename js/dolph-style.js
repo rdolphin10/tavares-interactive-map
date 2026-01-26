@@ -200,10 +200,10 @@ function applyDolphStyle(map) {
                     map.setPaintProperty(layer.id, 'text-color', DOLPH_COLORS.cityTitles);
                     map.setLayoutProperty(layer.id, 'text-transform', 'uppercase');
                     map.setLayoutProperty(layer.id, 'text-font', ['DIN Pro Bold', 'Arial Unicode MS Bold']);
-                    // Make Tavares larger than other cities
+                    // Hide Tavares from default labels (we'll add custom one)
                     map.setLayoutProperty(layer.id, 'text-size', [
                         'case',
-                        ['==', ['get', 'name'], 'Tavares'], 18,
+                        ['==', ['get', 'name'], 'Tavares'], 0,
                         12
                     ]);
                 } catch (e) {
@@ -251,9 +251,51 @@ function applyDolphStyle(map) {
 
         console.log('Dolph Map Company styling applied successfully');
 
+        // Add custom Tavares label at offset position
+        addCustomTavaresLabel(map);
+
     } catch (error) {
         console.error('Error applying Dolph styling:', error);
     }
+}
+
+/**
+ * Add custom Tavares city label
+ *
+ * Creates a custom HTML marker for Tavares at an offset position
+ * so it doesn't get blocked by business pins.
+ *
+ * @param {mapboxgl.Map} map - The Mapbox map instance
+ */
+function addCustomTavaresLabel(map) {
+    // Tavares coordinates with offset (moved south to avoid pins)
+    const tavaresLng = -81.7268;
+    const tavaresLat = 28.7935;  // Offset south from actual center (~28.8022)
+
+    // Create custom label element
+    const labelEl = document.createElement('div');
+    labelEl.className = 'custom-city-label';
+    labelEl.textContent = 'TAVARES';
+    labelEl.style.cssText = `
+        color: ${DOLPH_COLORS.cityTitles};
+        font-family: 'DIN Pro Bold', 'Arial Black', sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        white-space: nowrap;
+        pointer-events: none;
+        text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white;
+    `;
+
+    // Add as marker
+    new mapboxgl.Marker({
+        element: labelEl,
+        anchor: 'center'
+    })
+    .setLngLat([tavaresLng, tavaresLat])
+    .addTo(map);
+
+    console.log('Custom Tavares label added');
 }
 
 /**
