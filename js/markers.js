@@ -122,6 +122,11 @@ function createMarker(advertiser, map) {
             if (popupEl && popupEl.parentElement) {
                 document.body.appendChild(popupEl);
             }
+
+            // After popup renders, ensure it's fully visible in viewport
+            setTimeout(function() {
+                ensurePopupVisible(popup, map);
+            }, 50);
         }, 10);
     });
 
@@ -359,8 +364,40 @@ function focusOnMarker(index) {
                 if (popupEl && popupEl.parentElement) {
                     document.body.appendChild(popupEl);
                 }
+
+                // After popup renders, ensure it's fully visible in viewport
+                setTimeout(function() {
+                    ensurePopupVisible(currentOpenPopup, map);
+                }, 50);
             }, 10);
         }, 1100);
+    }
+}
+
+/**
+ * Ensure popup is fully visible within the browser viewport
+ *
+ * If the popup extends beyond the top of the viewport,
+ * pan the map down to bring the entire popup into view.
+ *
+ * @param {mapboxgl.Popup} popup - The popup instance
+ * @param {mapboxgl.Map} map - The map instance
+ */
+function ensurePopupVisible(popup, map) {
+    if (!popup) return;
+
+    var popupEl = popup.getElement();
+    if (!popupEl) return;
+
+    var popupRect = popupEl.getBoundingClientRect();
+
+    // Check if popup top is above the viewport (cut off at top)
+    if (popupRect.top < 0) {
+        // Calculate how many pixels we need to pan down
+        var panAmount = Math.abs(popupRect.top) + 20; // 20px buffer
+
+        // Pan the map down to bring popup into view
+        map.panBy([0, -panAmount], { duration: 300 });
     }
 }
 

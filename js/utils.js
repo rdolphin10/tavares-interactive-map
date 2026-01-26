@@ -88,10 +88,10 @@ function createPopupHTML(advertiser) {
         html += '</div>';
     }
 
-    // Phone Number
+    // Phone Number (clickable to call)
     if (advertiser.phone) {
         html += '<div class="popup-phone">';
-        html += 'Phone: ' + escapeHTML(advertiser.phone);
+        html += 'Phone: <a href="tel:' + escapeHTML(advertiser.phone) + '">' + escapeHTML(advertiser.phone) + '</a>';
         html += '</div>';
     }
 
@@ -125,13 +125,21 @@ function createPopupHTML(advertiser) {
     html += '</div>';
 
     // Business Card Image (if available) - LAST
+    // Clickable to website if available
     if (advertiser.business_card) {
         html += '<div class="popup-business-card">';
+        if (advertiser.website) {
+            html += '<a href="' + escapeHTML(advertiser.website) + '" target="_blank">';
+        }
         html += '<img src="' + escapeHTML(advertiser.business_card) + '" ';
         html += 'alt="' + escapeHTML(advertiser.name) + ' Business Card" ';
         html += 'class="business-card-img" ';
+        html += 'style="cursor: pointer;" ';
         html += 'onerror="this.parentElement.style.display=\'none\'" ';
         html += 'loading="lazy">';
+        if (advertiser.website) {
+            html += '</a>';
+        }
         html += '</div>';
     }
 
