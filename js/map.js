@@ -51,35 +51,57 @@ function populateUIElements() {
 }
 
 /**
- * Set up Dolph Map Company Logo (Bottom Right)
+ * Set up Dolph Map Company Logo and Contact Card (Bottom Right)
  *
- * Displays the Dolph Map Company logo in the bottom right corner.
- * Can be clicked to navigate to Dolph Map Company website.
+ * Displays the Dolph Map Company logo and sales contact information
+ * in the bottom right corner for businesses interested in advertising.
  */
 function setupDolphLogo() {
     const dolphLogoImg = document.getElementById('dolph-logo');
-    const dolphLogoContainer = document.querySelector('.dolph-logo-floating');
+    const dolphLink = document.getElementById('dolph-link');
 
-    if (!CONFIG.dolphLogo || !dolphLogoImg) {
+    if (!CONFIG.dolphLogo) {
         console.warn('Dolph logo not configured');
         return;
     }
 
     // Set logo image
-    if (CONFIG.dolphLogo.logoPath) {
+    if (dolphLogoImg && CONFIG.dolphLogo.logoPath) {
         dolphLogoImg.src = CONFIG.dolphLogo.logoPath;
         dolphLogoImg.alt = CONFIG.dolphLogo.logoAlt || 'Dolph Map Company';
     }
 
-    // Add click handler if link is provided
-    if (CONFIG.dolphLogo.link && CONFIG.dolphLogo.link !== '') {
-        dolphLogoContainer.style.cursor = 'pointer';
-        dolphLogoContainer.addEventListener('click', function() {
-            window.open(CONFIG.dolphLogo.link, '_blank');
-        });
+    // Set logo link
+    if (dolphLink && CONFIG.dolphLogo.link) {
+        dolphLink.href = CONFIG.dolphLogo.link;
     }
 
-    console.log('Dolph Map logo configured');
+    // Set up contact card if contact info is configured
+    if (CONFIG.dolphLogo.contact) {
+        const contact = CONFIG.dolphLogo.contact;
+
+        // Set contact name
+        const contactName = document.getElementById('contact-name');
+        if (contactName && contact.name) {
+            contactName.textContent = contact.name;
+        }
+
+        // Set phone with tel: link
+        const contactPhone = document.getElementById('contact-phone');
+        if (contactPhone && contact.phone) {
+            contactPhone.textContent = contact.phone;
+            contactPhone.href = 'tel:' + contact.phone.replace(/[^\d+]/g, '');
+        }
+
+        // Set email with mailto: link
+        const contactEmail = document.getElementById('contact-email');
+        if (contactEmail && contact.email) {
+            contactEmail.textContent = contact.email;
+            contactEmail.href = 'mailto:' + contact.email;
+        }
+    }
+
+    console.log('Dolph Map logo and contact card configured');
 }
 
 /**

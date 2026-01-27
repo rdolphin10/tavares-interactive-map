@@ -86,7 +86,7 @@ const CONFIG = {
     },
 
     // ========================================
-    // DOLPH MAP LOGO
+    // DOLPH MAP LOGO & CONTACT
     // ========================================
     dolphLogo: {
         /**
@@ -103,10 +103,20 @@ const CONFIG = {
         logoAlt: 'Dolph Map Company',
 
         /**
-         * Optional link when logo is clicked
-         * Set to null or empty string to disable link
+         * Link when logo is clicked
          */
-        link: 'https://dolphmap.com'
+        link: 'https://dolphmap.com',
+
+        /**
+         * Sales Contact Information
+         * Displayed in contact card above the logo
+         * For businesses interested in advertising
+         */
+        contact: {
+            name: 'Marsha Duvall',
+            phone: '(954) 695-0327',
+            email: 'mduvall@dolphmap.com'
+        }
     },
 
     // ========================================
