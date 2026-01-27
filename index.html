@@ -118,23 +118,22 @@
         </ul>
     </div>
 
-    <!-- Floating Dolph Map Elements (Bottom Right) -->
-    <div class="dolph-floating-stack">
-        <!-- Contact Card (Top) -->
-        <div class="dolph-contact-card" id="dolph-contact-card">
-            <div class="contact-header">Want to advertise here?</div>
+    <!-- Floating Dolph Advertise Button (Bottom Right) -->
+    <div class="dolph-advertise-container" id="dolph-advertise-container">
+        <!-- Expandable Panel (hidden by default) -->
+        <div class="dolph-expand-panel" id="dolph-expand-panel">
+            <img class="dolph-panel-logo" src="assets/images/Dolph Map Company Logo.jpg" alt="Dolph Map Company">
             <div class="contact-name" id="contact-name"></div>
             <a class="contact-phone" id="contact-phone" href=""></a>
             <a class="contact-email" id="contact-email" href=""></a>
+            <a class="dolph-website-link" href="https://dolphmap.com" target="_blank">dolphmap.com</a>
         </div>
 
-        <!-- Logo Card (Bottom) -->
-        <div class="dolph-logo-floating">
-            <a id="dolph-link" href="https://dolphmap.com" target="_blank" class="dolph-logo-link">
-                <img id="dolph-logo" src="assets/images/logo.png" alt="Dolph Map Company" class="dolph-logo-img">
-                <span class="dolph-link-text">dolphmap.com</span>
-            </a>
-        </div>
+        <!-- Always-visible button -->
+        <button class="dolph-advertise-btn" id="dolph-advertise-btn">
+            <span>Advertise on this Map</span>
+            <span class="expand-arrow" id="expand-arrow">&#9650;</span>
+        </button>
     </div>
 
     <!-- External Libraries (loaded from CDN) -->

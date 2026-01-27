@@ -51,32 +51,28 @@ function populateUIElements() {
 }
 
 /**
- * Set up Dolph Map Company Logo and Contact Card (Bottom Right)
+ * Set up Dolph Map Advertise Button (Bottom Right)
  *
- * Displays the Dolph Map Company logo and sales contact information
- * in the bottom right corner for businesses interested in advertising.
+ * Creates a collapsible "Advertise on this Map" button that expands
+ * to show sales contact information for businesses interested in advertising.
  */
 function setupDolphLogo() {
-    const dolphLogoImg = document.getElementById('dolph-logo');
-    const dolphLink = document.getElementById('dolph-link');
+    const container = document.getElementById('dolph-advertise-container');
+    const btn = document.getElementById('dolph-advertise-btn');
 
     if (!CONFIG.dolphLogo) {
-        console.warn('Dolph logo not configured');
+        console.warn('Dolph contact info not configured');
         return;
     }
 
-    // Set logo image
-    if (dolphLogoImg && CONFIG.dolphLogo.logoPath) {
-        dolphLogoImg.src = CONFIG.dolphLogo.logoPath;
-        dolphLogoImg.alt = CONFIG.dolphLogo.logoAlt || 'Dolph Map Company';
+    // Set up expand/collapse toggle
+    if (btn && container) {
+        btn.addEventListener('click', function() {
+            container.classList.toggle('expanded');
+        });
     }
 
-    // Set logo link
-    if (dolphLink && CONFIG.dolphLogo.link) {
-        dolphLink.href = CONFIG.dolphLogo.link;
-    }
-
-    // Set up contact card if contact info is configured
+    // Set up contact info if configured
     if (CONFIG.dolphLogo.contact) {
         const contact = CONFIG.dolphLogo.contact;
 
@@ -101,7 +97,7 @@ function setupDolphLogo() {
         }
     }
 
-    console.log('Dolph Map logo and contact card configured');
+    console.log('Dolph Map advertise button configured');
 }
 
 /**
