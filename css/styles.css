@@ -278,8 +278,8 @@ body {
 }
 
 .expand-arrow {
-    font-size: 10px;
-    transition: transform 0.3s ease;
+    font-size: 12px;
+    transition: transform 0.2s;
 }
 
 /* Rotate arrow when expanded */
