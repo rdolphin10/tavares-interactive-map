@@ -249,6 +249,21 @@ function applyDolphStyle(map) {
             }
         });
 
+        // ========================================
+        // HIDE COMMERCIAL BUSINESS POI LABELS
+        // Keep public amenities (parks, schools, hospitals, etc.)
+        // ========================================
+        if (map.getLayer('poi-label')) {
+            map.setFilter('poi-label', [
+                '!in', 'class',
+                'commercial_services',
+                'food_and_drink',
+                'food_and_drink_stores',
+                'lodging',
+                'store_like'
+            ]);
+        }
+
         console.log('Dolph Map Company styling applied successfully');
 
         // Add custom Tavares label at offset position
